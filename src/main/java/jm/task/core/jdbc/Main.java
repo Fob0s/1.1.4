@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args)  {
         UserDao userDaoJDBC = new UserDaoJDBCImpl();
         userDaoJDBC.createUsersTable();
         userDaoJDBC.saveUser("Rustam", "Bashaev", (byte) 36);
@@ -23,5 +23,6 @@ public class Main {
         }
         userDaoJDBC.cleanUsersTable();
         userDaoJDBC.dropUsersTable();
+
     }
 }
