@@ -2,10 +2,8 @@ package jm.task.core.jdbc.dao;
 
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +24,9 @@ public class UserDaoJDBCImpl implements UserDao {
         try {
             PreparedStatement ps = Util.getConnection().prepareStatement(sql);
             ps.executeUpdate();
-        } catch (SQLException e) {
+        } catch (SQLSyntaxErrorException e) {
+            System.err.println("Таблица с таким именем уже существует");
+        } catch (SQLException e){
             e.printStackTrace();
         }
     }
@@ -38,7 +38,9 @@ public class UserDaoJDBCImpl implements UserDao {
         try {
             PreparedStatement ps = Util.getConnection().prepareStatement(sql);
             ps.executeUpdate();
-        } catch (SQLException e) {
+        } catch (SQLSyntaxErrorException e) {
+            System.err.println("Таблицы с именем test_database.new_table_users, не существует.");
+        } catch (SQLException e){
             e.printStackTrace();
         }
     }
