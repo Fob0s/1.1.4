@@ -21,8 +21,8 @@ public class UserDaoJDBCImpl implements UserDao {
                 """; // переименовать в users;
 
         try ( Connection connection = Util.getConnection();
-        PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.executeUpdate();
+        Statement ps = connection.createStatement()) {
+            ps.executeUpdate(sql);
         }  catch (SQLException e){
             e.printStackTrace();
         }
@@ -34,8 +34,8 @@ public class UserDaoJDBCImpl implements UserDao {
                 DROP TABLE IF EXISTS new_table_users;
                 """;
         try (Connection connection = Util.getConnection();
-             PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.executeUpdate();
+             Statement ps = connection.createStatement()) {
+            ps.executeUpdate(sql);
         }  catch (SQLException e){
             e.printStackTrace();
         }
@@ -75,7 +75,7 @@ public class UserDaoJDBCImpl implements UserDao {
                 SELECT * FROM new_table_users;
                 """;
         try (Connection connection = Util.getConnection();
-             PreparedStatement ps = connection.prepareStatement(sql)) {
+             Statement ps = connection.createStatement()) {
             ResultSet a = ps.executeQuery(sql);
             while (a.next()){
                 result.add(new User(a.getString(2), a.getString(3), a.getByte(4)));
@@ -92,8 +92,8 @@ public class UserDaoJDBCImpl implements UserDao {
                 TRUNCATE TABLE new_table_users;
                 """;
         try(Connection connection = Util.getConnection();
-            PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.executeUpdate();
+            Statement ps = connection.createStatement()) {
+            ps.executeUpdate(sql);
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
